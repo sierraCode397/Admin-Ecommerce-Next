@@ -19,20 +19,26 @@ export const useAuth = () => {
 
 function useProviderAuth() {
     const [user, setUser] = useState(null);
+    const [useLogin, setLogin] = useState(false) 
 
     const signIn = async (email, password) => {
-    const options = {
-        headers:{
-            accept: '*/*',
-            'Content-Type': 'application/json',
-        },
+        const options = {
+            headers:{
+                accept: '*/*',
+                'Content-Type': 'application/json',
+            },
+        };
+        const {
+            data: { access_token },
+        } = await axios.post(endPoints.auth.login, { email, password }, options);
+        if (access_token) {
+            Cookie.set("token", access_token, {expires: 5});            
+        }
     };
-    const {
-        data: { access_token },
-      } = await axios.post(endPoints.auth.login, { email, password }, options);
-    console.log(access_token);
-    };
+
     return {
+        useLogin,
+        setLogin,
         user,
         signIn,
     };

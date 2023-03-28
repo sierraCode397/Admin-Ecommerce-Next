@@ -13,8 +13,15 @@ export default function LoginPage() {
     const password = passwordRef.current.value;
 
     auth.signIn(email,password).then (()=> {
+      auth.setLogin(false);
       console.log("Login success")
-    });
+      },
+      (reason) => {
+        console.log('Login Failed');
+        console.useLogin(reason);
+        auth.setLogin(true);
+      }
+    );
   };
 
   return (
@@ -85,6 +92,11 @@ export default function LoginPage() {
                 </span>
                 Sign in
               </button>
+              {auth.useLogin ? (
+                <div className="p-3 mb-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                  <span className="font-medium">Error! Invalid Username or Password</span>
+                  {auth.useLogin}
+                </div> ) : null}
             </div>
           </form>
         </div>
