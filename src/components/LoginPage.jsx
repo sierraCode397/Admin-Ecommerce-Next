@@ -18,7 +18,7 @@ export default function LoginPage() {
       },
       (reason) => {
         console.log('Login Failed');
-        console.useLogin(reason);
+        console.log(reason);
         auth.setLogin(true);
       }
     );
