@@ -9,15 +9,20 @@ const people = [
     },
   ];
 
+  import { useState } from"react";
+  import Pagination from"@common/Pagination";
   import endPoints from "@services/api";
   import useFetch from "@hooks/useFetch";
 
-  const PRODUCT_LIMIT = 15;
-  const PRODUCT_OFFSET = 15
+  const PRODUCT_LIMIT = 5;
+  const PRODUCT_OFFSET = 0;
   
   export default function Dashboard() {
-    const products = useFetch(endPoints.products.limitOffset(PRODUCT_LIMIT, PRODUCT_OFFSET));
-    console.log(products)
+    const [offset, setOffset] = useState(PRODUCT_OFFSET);
+    const products = useFetch(endPoints.products.limitOffset(PRODUCT_LIMIT, offset));
+    console.log(products);
+    const totalItems = useFetch(endPoints.products.limitOffset(0, 0)).length;
+
 
     return (
       <>
@@ -63,7 +68,6 @@ const people = [
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">{product.category.name}</div>
-                          {/* <div className="text-sm text-gray-500">{product.category.id}</div> */}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${product.price}</span>
@@ -86,6 +90,11 @@ const people = [
               </div>
             </div>
           </div>
+          <Pagination
+            setOffset = {setOffset}
+            productNumberLimit = {PRODUCT_LIMIT}
+            totalItems = {totalItems}
+          />
         </div>
       </>
     );
