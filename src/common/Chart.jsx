@@ -7,16 +7,20 @@ export const Chart = ({ chartData }) => {
   return (
     <>
       <Bar
-        data={chartData}
+        data={chartData}  /* Estos son los datos que se le pasan por parametro a la grafica que va precentar */
         options={{
-          title: {
-            display: true,
-            text: 'Category',
-            fontSize: 20,
+          plugins: {   /* Opsiones */
+            title: {   /* Estos son las configuraciones que se le dan a los diferentes atributos de los datos que se le dieron al tipo de grafica */
+              display: true,
+              text: 'Category',
+              fontSize: 20,
+            },
           },
-          legend: {
-            display: true,
-            position: 'right',
+          plugins: {
+            legend: {
+              display: true,
+              position: 'right',
+            },
           },
         }}
       />

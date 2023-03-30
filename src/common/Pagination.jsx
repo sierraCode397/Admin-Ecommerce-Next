@@ -2,18 +2,22 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { useState } from"react";
 
 export default function Pagination({setOffset, productNumberLimit, totalItems }) {
-    const pivot = 3;
+    const pivot = 3; 
+      /*con el pivote podemos decidir cuántos números queremos que esténdel lado izquierdo y del lado derecho*/
     const itemsArray = [];
     const [current, setCurrent] = useState(1);
     const totalNumberPages = Math.ceil(totalItems / productNumberLimit);
+      //Con Math.ceil se obtiene un número entero por encima del resultado
     const final = Math.min(Math.max(pivot * 2 + 2, pivot + current + 1), totalNumberPages + 1);
     const initial = Math.min(Math.max(final - (pivot * 2 + 1), 1), Math.max(current - pivot, 1));
+      //Con el pivote se calculan los números que estarán al inicio y al final del reglón de páginas
 
     const getShade =(i) => {
       return i === current ?
         'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' :
         'bg-white border-gray-300 text-gray-500 hover:bg-gray-50';
     }
+      //Con la función getShade se resalta la página seleccionada
 
     for (let i = initial; i < final; i++) {
       itemsArray.push(
@@ -32,11 +36,19 @@ export default function Pagination({setOffset, productNumberLimit, totalItems })
         </a>
       );
     }
+      //Se irá agregando al array los botones que aparecerán en el reglón de páginas
 
     const startButton = () => {
       setCurrent(1);
       setOffset(0);
     };
+      //Con startButton la interfaz muestra los primeros 5 productos del total
+
+    const endButton = () => {
+      setCurrent(totalNumberPages);
+      setOffset((totalNumberPages -1)* productNumberLimit);
+    };
+      //Con endButton la interfaz muestra los últimos 5 productos del total
 
 /*     const prevButton = () => {
       if (current > 1) {
@@ -52,14 +64,9 @@ export default function Pagination({setOffset, productNumberLimit, totalItems })
       }
     }; */
 
-    const endButton = () => {
-      setCurrent(totalNumberPages);
-      setOffset((totalNumberPages -1)* productNumberLimit);
-    };
-
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mb-6 mt-6">
-      <div className="flex flex-1 justify-between sm:hidden">
+{/*       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href="#"
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
@@ -72,7 +79,7 @@ export default function Pagination({setOffset, productNumberLimit, totalItems })
         >
           Next
         </a>
-      </div>
+      </div> */}
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
@@ -81,7 +88,7 @@ export default function Pagination({setOffset, productNumberLimit, totalItems })
             <span className="font-medium">{totalItems}&nbsp;</span> results
           </p>
         </div>
-        <div>
+        <div className='ml-4'>
           <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <a
               onClick={startButton}
