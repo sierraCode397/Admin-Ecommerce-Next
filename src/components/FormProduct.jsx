@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { addProduct } from "@services/api/products";
 import { ValidationSchema } from "@common/ValidationShema";
 
 export default function FormProduct() {
@@ -23,7 +24,9 @@ export default function FormProduct() {
       }
       alert(errorMessage);
     });
-    console.log({ valid }); //Imprime los datos después de la validación
+      addProduct(data).then ((response) => {
+      console.log(response)
+    });
   };
 
   return (
