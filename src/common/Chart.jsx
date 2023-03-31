@@ -12,11 +12,11 @@ export const Chart = ({ chartData }) => {
           plugins: {   /* Opsiones */
             title: {   /* Estos son las configuraciones que se le dan a los diferentes atributos de los datos que se le dieron al tipo de grafica */
               display: true,
-              text: 'Category',
-              fontSize: 20,
+              text: 'Product Graph',
+              fontSize: 30,
             },
           },
-          plugins: {
+          plugins: { 
             legend: {
               display: true,
               position: 'right',

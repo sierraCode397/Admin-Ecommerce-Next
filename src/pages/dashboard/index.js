@@ -18,7 +18,7 @@ import useFetch from "@hooks/useFetch";
 
     const data = {
       datasets: [{
-        label: "Categories",
+        label: "Chart",
         data: countOccurrences(categoryCount),
         borderWidht: 2,
         backgroundColor: ["#ffbb11", "#c0c0c0", "#50AF95", "#f3ba2f", "#2a71d0"],
