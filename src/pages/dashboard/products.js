@@ -2,10 +2,13 @@ import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
 import FormProduct from "@components/FormProduct";
 import Modal from '@common/Modal';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Fragment, useState } from 'react';
 import { BriefcaseIcon, CalendarIcon, PlusIcon, ChevronDownIcon, CurrencyDollarIcon, LinkIcon, PencilIcon } from '@heroicons/react/solid';
 import { Menu, Transition } from '@headlessui/react';
+import useAlert from "@hooks/useAlert";
+import Alert from "@common/Alert";
+import axios from "axios";
 /* import { Dialog } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/solid'; */
 
@@ -13,18 +16,27 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const PRODUCT_LIMIT = 15;
-const PRODUCT_OFFSET = 0;
-
-export default function product() {
+export default function Product() {
     const [open, setOpen] = useState(false);
     const [useProducts, setProducts] = useState([]);
-    const products = useFetch(endPoints.products.limitOffset(PRODUCT_LIMIT, PRODUCT_OFFSET));
+    const [alert, setAlert, toggleAlert] =useAlert()
 /*     const cancelButtonRef = useRef(null); */
+    useEffect(() => {
+      async function getProducts() {
+        const response = await axios.get(endPoints.products.get);
+        setProducts(response.data);
+      }
+      try {
+        getProducts();
+      } catch (error) {
+        console.log(error)
+      }
+    }, [alert])
 
 
   return (
     <>
+    <Alert alert={alert} handleClose={toggleAlert} />
       <div className="lg:flex lg:items-center lg:justify-between mb-4 mt-6">
         <div className="min-w-0 flex-1">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">List of Products</h2>
@@ -134,7 +146,7 @@ export default function product() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {products?.map((product) => (
+                  {useProducts?.map((product) => (
                     <tr key={`Product-Item-${product.id}`}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -202,7 +214,7 @@ export default function product() {
       </Dialog>
     </Transition.Root> */}
       <Modal open={open} setOpen={setOpen}>
-        <FormProduct />
+        <FormProduct setOpen={setOpen} setAlert={setAlert} />
       </Modal>    
     </>
   );
