@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { addProduct } from "@services/api/products";
-import { ValidationSchema } from "@common/ValidationShema";
+import { addProduct } from '@services/api/products';
+import { ValidationSchema } from '@common/ValidationShema';
 
-export default function FormProduct() {
+export default function FormProduct({ setOpen, setAlert }) {
   const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
@@ -24,9 +24,51 @@ export default function FormProduct() {
       }
       alert(errorMessage);
     });
-      addProduct(data).then ((response) => {
-      console.log(response)
-    });
+    
+    addProduct(data)
+      .then(() => {
+        setAlert({
+          active: true,
+          message: 'Product added successFully',
+          type: 'success',
+          autoClose: false,
+        });
+        setOpen(false);
+      })
+      .catch((error) => {
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'Error',
+          autoClose: false,
+        });
+      });
+
+/*       const valid = await ValidationSchema.validate(data).then(() => {
+        addProduct(data).then(() => {
+          //console.log(response);
+          setAlert({
+            active: true, //Se activa
+            message: 'Product added successfully',
+            type: 'success',
+            autoClose:false,
+          });
+         setOpen(false);
+        });
+      }).catch(function (err) {
+        //alert(err.message);
+          console.log(err.message); //Imprime los datos después de la validación
+          setAlert({
+            active: true,
+            message: err.message,
+            type: 'error',
+            autoClose: false,
+          });
+        }); 
+        
+      PARA QUE EL ALERT SALGA EN EL MODAL  */
+
+
   };
 
   return (

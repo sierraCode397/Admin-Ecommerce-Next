@@ -1,21 +1,25 @@
 import { XCircleIcon } from '@heroicons/react/solid';
 
 const Alert = ({ alert, handleClose }) => {
+
   if (alert && alert?.autoClose) {
     setTimeout(() => {
       handleClose();
-    }, 9000);
+    }, 5000);
   }
+  const bgColor = alert.type=== 'success' ? 'green-100' : 'red-100';
 
   return (
     <>
       {alert?.active && (
-        <div x-data className="bg-indigo-100 p-5 w-full rounded mb-8">
-          <div className="flex space-x-3">
-            <div className="flex-1 leading-tight text-sm text-black font-medium">{alert.message}</div>
-            <button type="button">
-              <XCircleIcon className="w-6 h-6 text-gray-600" onClick={handleClose} />
-            </button>
+        <div x-data x-init="setTimeout(() => show = false, 3000)" className={`flex items-center mt-6 bg-${bgColor} p-5 w-full h-16 rounded mb-4`}>
+          <div className="flex justify-between w-full">
+            <div className="ml-4 flex-1 leading-tight text-lg text-black font-medium">{alert.message}</div>
+            <div>
+              <button className='mr-2' type="button">
+                <XCircleIcon className="w-6 h-6 text-gray-600" onClick={handleClose} />
+              </button>
+            </div>
           </div>
         </div>
       )}

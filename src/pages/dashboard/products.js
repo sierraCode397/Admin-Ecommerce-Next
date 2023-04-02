@@ -1,5 +1,4 @@
 import endPoints from '@services/api';
-import useFetch from '@hooks/useFetch';
 import FormProduct from "@components/FormProduct";
 import Modal from '@common/Modal';
 import { useRef, useEffect } from 'react';
@@ -19,7 +18,7 @@ function classNames(...classes) {
 export default function Product() {
     const [open, setOpen] = useState(false);
     const [useProducts, setProducts] = useState([]);
-    const [alert, setAlert, toggleAlert] =useAlert()
+    const { alert, setAlert, toggleAlert } = useAlert();
 /*     const cancelButtonRef = useRef(null); */
     useEffect(() => {
       async function getProducts() {
@@ -29,9 +28,9 @@ export default function Product() {
       try {
         getProducts();
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }, [alert])
+    }, [alert]);
 
 
   return (
@@ -47,11 +46,11 @@ export default function Product() {
             </div>
             <div className="mt-2 flex items-center text-sm text-gray-500">
               <CurrencyDollarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              $120k &ndash; $140k
+              $20k &ndash; $140k
             </div>
             <div className="mt-2 flex items-center text-sm text-gray-500">
               <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              Closing on January 9, 2020
+              Closing on April 14, 2023
             </div>
           </div>
         </div>
