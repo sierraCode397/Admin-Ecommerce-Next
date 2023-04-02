@@ -39,7 +39,7 @@ export default function FormProduct({ setOpen, setAlert }) {
         setAlert({
           active: true,
           message: error.message,
-          type: 'Error',
+          type: 'error',
           autoClose: false,
         });
       });
