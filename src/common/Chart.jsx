@@ -7,6 +7,7 @@ export const Chart = ({ chartData }) => {
   return (
     <>
       <Bar
+        className='mt-8'
         data={chartData}  /* Estos son los datos que se le pasan por parametro a la grafica que va precentar */
         options={{
           plugins: {   /* Opsiones */
