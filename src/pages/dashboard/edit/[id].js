@@ -18,8 +18,6 @@ export default function Edit() {
 
         if (response) {
           setProduct(response.data);
-          console.log(router.isReady)
-          console.log(!router.isReady)
         }
       } catch (error) {
         console.log(error);

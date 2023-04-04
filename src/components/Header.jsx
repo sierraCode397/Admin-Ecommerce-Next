@@ -9,11 +9,6 @@ const navigation = [
   { name: 'Productos', href: '/dashboard/products/', current: false },
   { name: 'Ventas', href: '#', current: false },
 ];
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -21,10 +16,11 @@ function classNames(...classes) {
 
 export default function Header() {
   const auth = useAuth();
+
   const userData = {
-    name: auth?.user?.name ,
-    email: auth?.user?.email ,
-    imageUrl: auth?.user?.avatar ,
+    name: auth?.user?.name,
+    email: auth?.user?.email,
+    imageUrl: auth?.user?.avatar,
   };
 
   return (
@@ -81,15 +77,9 @@ export default function Header() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <a href={item.href} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
-                                  {item.name}
-                                </a>
-                              )}
-                            </Menu.Item>
-                          ))}
+                          <button onClick={() => auth.logout()} className="'block px-4 py-2 text-sm text-gray-700'">
+                            Log out
+                          </button>
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -137,11 +127,9 @@ export default function Header() {
                   </button>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button key={item.name} as="a" href={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
+                 <button onClick={() => auth.logout()} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                    Log out
+                  </button>
                 </div>
               </div>
             </Disclosure.Panel>

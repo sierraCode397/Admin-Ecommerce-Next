@@ -42,10 +42,18 @@ function useProviderAuth() {
         }
     };
 
+    const logout = () => {
+        Cookie.remove("token");
+        setUser(null);
+        delete axios.defaults.headers.Authorization;
+        window.location.href = '/login';  /* router.push('/login');  Otra forma de redieccionar*/
+    }
+
     return {
         useLogin,
         setLogin,
         user,
         signIn,
+        logout,
     };
 }
