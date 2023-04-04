@@ -1,10 +1,12 @@
 import { useRef } from 'react';
-import { addProduct } from '@services/api/products';
+import { useRouter } from "next/router";
+import { addProduct, updateProduct } from '@services/api/products';
 import { ValidationSchema } from '@common/ValidationShema';
 
 export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
-  console.log(product)
+  const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
@@ -24,27 +26,34 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       }
       alert(errorMessage);
     });
-    
-    addProduct(data)
-      .then(() => {
-        setAlert({
-          active: true,
-          message: 'Product added successFully',
-          type: 'success',
-          autoClose: false,
-        });
-        setOpen(false);
-      })
-      .catch((error) => {
-        setAlert({
-          active: true,
-          message: error.message,
-          type: 'error',
-          autoClose: false,
-        });
-      });
 
-/*       const valid = await ValidationSchema.validate(data).then(() => {
+    if (product) {
+      console.log(data);
+      updateProduct(product.id, data).then((response) => {
+        router.push("/dashboard/products")
+      });
+    } else {
+      addProduct(data)
+        .then(() => {
+          setAlert({
+            active: true,
+            message: 'Product added successFully',
+            type: 'success',
+            autoClose: false,
+          });
+          setOpen(false);
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: error.message,
+            type: 'error',
+            autoClose: false,
+          });
+        });
+    }
+
+    /*       const valid = await ValidationSchema.validate(data).then(() => {
         addProduct(data).then(() => {
           //console.log(response);
           setAlert({
@@ -67,8 +76,6 @@ export default function FormProduct({ setOpen, setAlert, product }) {
         }); 
         
       PARA QUE EL ALERT SALGA EN EL MODAL  */
-
-
   };
 
   return (
@@ -80,13 +87,25 @@ export default function FormProduct({ setOpen, setAlert, product }) {
               <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                 Title
               </label>
-              <input defaultValue={product?.title} type="text" name="title" id="title" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+              <input
+                defaultValue={product?.title}
+                type="text"
+                name="title"
+                id="title"
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              />
             </div>
             <div className="col-span-6 sm:col-span-3">
               <label htmlFor="price" className="block text-sm font-medium text-gray-700">
                 Price
               </label>
-              <input defaultValue={product?.price} type="number" name="price" id="price" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+              <input
+                defaultValue={product?.price}
+                type="number"
+                name="price"
+                id="price"
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              />
             </div>
             <div className="col-span-6">
               <label htmlFor="category" className="block text-sm font-medium text-gray-700">

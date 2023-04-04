@@ -11,13 +11,15 @@ export default function Edit() {
   const router = useRouter();
   useEffect(() => {
     const { id } = router.query;
-    if (!router.isReady) return;
+    if (!router.isReady) return; /* Solo se ejecuta una vez para evitar el error inicial PORQUE todavia no tenemos acceso al ID de la API */
     async function getProduct() {
       try {
         const response = await axios.get(endPoints.products.getId(id));
 
         if (response) {
           setProduct(response.data);
+          console.log(router.isReady)
+          console.log(!router.isReady)
         }
       } catch (error) {
         console.log(error);
@@ -25,7 +27,7 @@ export default function Edit() {
       }
     }
     getProduct();
-  }, [router?.isReady]);
+  }, [router?.isReady]); /* Controla cuando se vuelva a usar el efecto secundario de useEffect  */
 
   return notFound ? <NotFound /> : <FormProduct product={product} />;
 }
