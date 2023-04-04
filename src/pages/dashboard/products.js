@@ -9,7 +9,8 @@ import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
 import axios from 'axios';
 import { deleteProduct } from '@services/api/products';
-import Link from "next/link";
+import Link from 'next/link';
+import Image from 'next/image';
 /* import { Dialog } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/solid'; */
 
@@ -35,21 +36,23 @@ export default function Product() {
   }, [alert]);
 
   const handleDelete = (id) => {
-    deleteProduct(id).then(() => {
-      setAlert({
-        active: true,
-        message: 'Delete product SuccessFully',
-        type: 'error',
-        autoClose: true,
+    deleteProduct(id)
+      .then(() => {
+        setAlert({
+          active: true,
+          message: 'Delete product SuccessFully',
+          type: 'error',
+          autoClose: true,
+        });
+      })
+      .catch((error) => {
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: false,
+        });
       });
-    }).catch((error) => {
-      setAlert({
-        active: true,
-        message: error.message,
-        type: 'error',
-        autoClose: false,
-      });
-    });
   };
 
   return (
@@ -169,7 +172,9 @@ export default function Product() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <img className="h-10 w-10 rounded-full" src={product.images[0]} alt="" />
+                            {product.images[0] && (
+                              <Image className="h-10 w-10 rounded-full" unoptimized loader={() => product.images[0]} src={product.images[0]} layout="fixed" width={40} height={40} alt="" />
+                            )}
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">{product.title}</div>
