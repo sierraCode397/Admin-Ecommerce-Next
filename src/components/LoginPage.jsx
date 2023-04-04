@@ -1,7 +1,8 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
 import React, { useRef } from 'react';
-import { useRouter } from "next/router";
-import { useAuth } from "@hooks/useAuth";
+import { useRouter } from 'next/router';
+import { useAuth } from '@hooks/useAuth';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const emailRef = useRef(null);
@@ -14,9 +15,10 @@ export default function LoginPage() {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    auth.signIn(email,password).then (()=> {
-      auth.setLogin(false);
-      router.push("/dashboard");
+    auth.signIn(email, password).then(
+      () => {
+        auth.setLogin(false);
+        router.push('/dashboard');
       },
       (reason) => {
         console.log('Login Failed');
@@ -78,9 +80,9 @@ export default function LoginPage() {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <Link href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -98,7 +100,8 @@ export default function LoginPage() {
                 <div className="p-3 mb-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                   <span className="font-medium">Error! Invalid Username or Password</span>
                   {auth.useLogin}
-                </div> ) : null}
+                </div>
+              ) : null}
             </div>
           </form>
         </div>

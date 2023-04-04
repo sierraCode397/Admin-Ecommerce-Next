@@ -7,17 +7,16 @@ export const Chart = ({ chartData }) => {
   return (
     <>
       <Bar
-        className='mt-8'
-        data={chartData}  /* Estos son los datos que se le pasan por parametro a la grafica que va precentar */
+        className="mt-8"
+        data={chartData} /* Estos son los datos que se le pasan por parametro a la grafica que va precentar */
         options={{
-          plugins: {   /* Opsiones */
-            title: {   /* Estos son las configuraciones que se le dan a los diferentes atributos de los datos que se le dieron al tipo de grafica */
-              display: true,
-              text: 'Product Graph',
-              fontSize: 30,
-            },
+          /* Opsiones */
+          title: {
+            /* Estos son las configuraciones que se le dan a los diferentes atributos de los datos que se le dieron al tipo de grafica */ display: true,
+            text: 'Product Graph',
+            fontSize: 30,
           },
-          plugins: { 
+          plugins: {
             legend: {
               display: true,
               position: 'right',
