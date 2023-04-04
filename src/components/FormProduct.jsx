@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useRouter } from "next/router";
 import { addProduct, updateProduct } from '@services/api/products';
 import { ValidationSchema } from '@common/ValidationShema';
@@ -78,6 +78,11 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       PARA QUE EL ALERT SALGA EN EL MODAL  */
   };
 
+  useEffect(() => {
+    const categoryTag = document.querySelector('#category');
+    categoryTag.value = product?.categoryId;
+  }, [product]);
+
   return (
     <form ref={formRef} onSubmit={handleSubmit}>
       <div className="mt-4 overflow-hidden">
@@ -113,7 +118,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
               </label>
               <select
                 id="category"
-                value={product?.category?.id.toString()}
+                value={product?.categoryId}
                 name="category"
                 autoComplete="category-name"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
