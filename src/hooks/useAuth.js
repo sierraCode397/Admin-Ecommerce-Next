@@ -31,12 +31,23 @@ function useProviderAuth() {
     } = await axios.post(endPoints.auth.login, { email, password }, options);
     if (access_token) {
       const token = access_token;
-      Cookie.set('token', token, { expires: 5 });
+      const oneHour = 1 / 24;
+      Cookie.set('token', token, { expires: oneHour });
 
       axios.defaults.headers.Authorization = `Bearer ${token}`;
       const { data: user } = await axios.get(endPoints.auth.profile);
       console.log(user);
       setUser(user);
+    }
+  };
+
+  const refreshSession = async () => {
+    const token = Cookie.get('token');
+
+    if (token) {
+      axios.defaults.headers.Authorization = `Bearer ${token}`;
+      const response = await axios.get(endPoints.auth.profile);
+      setUser(response.data);
     }
   };
 
@@ -48,6 +59,7 @@ function useProviderAuth() {
   };
 
   return {
+    refreshSession,
     useLogin,
     setLogin,
     user,
