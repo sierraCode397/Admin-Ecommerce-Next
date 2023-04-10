@@ -4,18 +4,19 @@ import axios from 'axios';
 const useFetch = (endpoint) => {
   const [data, setData] = useState([]);
 
-  async function fetchData() {
-    const response = await axios.get(endpoint);
-    setData(response.data);
-  }
-
   useEffect(() => {
-    try {
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(endpoint);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, [endpoint]);
+
   return data;
 };
 

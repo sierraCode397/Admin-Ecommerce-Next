@@ -1,8 +1,7 @@
 import endPoints from '@services/api';
 import FormProduct from '@components/FormProduct';
 import Modal from '@common/Modal';
-import { useEffect } from 'react';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { BriefcaseIcon, CalendarIcon, PlusIcon, ChevronDownIcon, CurrencyDollarIcon, LinkIcon, PencilIcon, XCircleIcon } from '@heroicons/react/solid';
 import { Menu, Transition } from '@headlessui/react';
 import useAlert from '@hooks/useAlert';
@@ -11,6 +10,8 @@ import axios from 'axios';
 import { deleteProduct } from '@services/api/products';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
 /* import { Dialog } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/solid'; */
 
@@ -22,18 +23,26 @@ export default function Product() {
   const [open, setOpen] = useState(false);
   const [useProducts, setProducts] = useState([]);
   const { alert, setAlert, toggleAlert } = useAlert();
+  const router = useRouter();
   /*     const cancelButtonRef = useRef(null); */
   useEffect(() => {
     async function getProducts() {
       const response = await axios.get(endPoints.products.get);
       setProducts(response.data);
     }
-    try {
-      getProducts();
-    } catch (error) {
-      console.log(error);
+    if (router.isReady) {
+      const token = Cookie.get('token');
+      if (!token) {
+        router.push('/login');
+      } else {
+        try {
+          getProducts();
+        } catch (error) {
+          console.log(error);
+        }
+      }
     }
-  }, [alert]);
+  }, [alert, router.isReady, router]);
 
   const handleDelete = (id) => {
     deleteProduct(id)

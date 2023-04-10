@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from '@common/Pagination';
 import { Chart } from '@common/Chart';
 import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 const PRODUCT_LIMIT = 15;
 const PRODUCT_OFFSET = 0;
@@ -12,6 +14,16 @@ export default function Dashboard() {
   const [offset, setOffset] = useState(PRODUCT_OFFSET);
   const products = useFetch(endPoints.products.limitOffset(PRODUCT_LIMIT, offset));
   const totalItems = useFetch(endPoints.products.limitOffset(0, 0)).length;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady) {
+      const token = Cookies.get('token');
+      if (!token) {
+        router.push('/login');
+      }
+    }
+  }, [router.isReady, router]);
 
   const categoryNames = products?.map((product) => product.category);
   const categoryCount = categoryNames?.map((category) => category.name);

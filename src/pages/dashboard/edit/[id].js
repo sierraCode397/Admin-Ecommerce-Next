@@ -25,7 +25,7 @@ export default function Edit() {
       }
     }
     getProduct();
-  }, [router?.isReady]); /* Controla cuando se vuelva a usar el efecto secundario de useEffect  */
+  }, [router?.isReady, router.query]); /* Controla cuando se vuelva a usar el efecto secundario de useEffect  */
 
   return notFound ? <NotFound /> : <FormProduct product={product} />;
 }

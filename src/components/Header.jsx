@@ -3,11 +3,12 @@ import { Fragment } from 'react';
 import { useAuth } from '@hooks/useAuth';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-import Link from "next/link";
+import Link from 'next/link';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', current: false },
   { name: 'Productos', href: '/dashboard/products/', current: false },
+  { name: 'Home', href: '/', current: false },
 ];
 
 function classNames(...classes) {
@@ -16,7 +17,7 @@ function classNames(...classes) {
 
 export default function Header() {
   const auth = useAuth();
-  console.log(auth.user)
+  console.log(auth.user);
   const userData = {
     name: auth?.user?.name,
     email: auth?.user?.email,
