@@ -11,7 +11,6 @@ import { deleteProduct } from '@services/api/products';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import Cookie from 'js-cookie';
 /* import { Dialog } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/solid'; */
 
@@ -30,18 +29,11 @@ export default function Product() {
       const response = await axios.get(endPoints.products.get);
       setProducts(response.data);
     }
-    if (router.isReady) {
-      const token = Cookie.get('token');
-      if (!token) {
-        router.push('/login');
-      } else {
         try {
           getProducts();
         } catch (error) {
           console.log(error);
         }
-      }
-    }
   }, [alert, router.isReady, router]);
 
   const handleDelete = (id) => {
