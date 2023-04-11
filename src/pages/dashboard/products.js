@@ -29,11 +29,11 @@ export default function Product() {
       const response = await axios.get(endPoints.products.get);
       setProducts(response.data);
     }
-        try {
-          getProducts();
-        } catch (error) {
-          console.log(error);
-        }
+    try {
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
   }, [alert, router.isReady, router]);
 
   const handleDelete = (id) => {
