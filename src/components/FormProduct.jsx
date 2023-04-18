@@ -15,7 +15,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       price: parseInt(formData.get('price')),
       description: formData.get('description'),
       categoryId: parseInt(formData.get('category')),
-      images: [formData.get('images').name],
+      images: [formData.get('images')],
     };
     const valid = await ValidationSchema.validate(data).catch(function (err) {
       let errorValidate = err.errors;
@@ -163,9 +163,8 @@ export default function FormProduct({ setOpen, setAlert, product }) {
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
-                        <input defaultValue={product?.images} id="images" name="images" type="file" className="sr-only" />
                       </label>
-                      <p className="pl-1">or drag and drop</p>
+                      <input id="images" name="images" type="text" placeholder="Direccion URL de tu imagen" className="ml-4 block w-full h-full p-0 m-0 border-0 outline-none" />
                     </div>
                     <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                   </div>
