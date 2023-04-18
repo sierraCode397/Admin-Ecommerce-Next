@@ -1,17 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from '@common/Pagination';
 import { Chart } from '@common/Chart';
 import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
+import { deleteProduct } from '@services/api/products';
+import useAlert from '@hooks/useAlert';
+import Alert from '@common/Alert';
 import Link from 'next/link';
+import { XCircleIcon } from '@heroicons/react/solid';
 
-const PRODUCT_LIMIT = 15;
+const PRODUCT_LIMIT = 10;
 const PRODUCT_OFFSET = 0;
 
 export default function Dashboard() {
+  const { alert, setAlert, toggleAlert } = useAlert();
   const [offset, setOffset] = useState(PRODUCT_OFFSET);
   const products = useFetch(endPoints.products.limitOffset(PRODUCT_LIMIT, offset));
-  const totalItems = useFetch(endPoints.products.limitOffset(0, 0)).length;
+  let totalItems = useFetch(endPoints.products.limitOffset(0, 0)).length;
+  const refreshProducts = () => {
+    setOffset(PRODUCT_OFFSET); // establecer offset en el valor original
+    fetch(endPoints.products.limitOffset(0, 0))
+      .then((response) => response.json())
+      .then((data) => {
+        // Actualizar el valor de totalItems con la longitud de la nueva lista de productos
+        const newTotalItems = data.length;
+        // Asignar el nuevo valor a la constante totalItems
+        totalItems = newTotalItems;
+        console.log(totalItems);
+      })
+      .catch((error) => console.error(error));
+  };
+  const [myComponentKey, setMyComponentKey] = useState(0);
+
+  const handleRefreshClick = () => {
+    // Incrementar la clave de MyComponent para forzar su actualización
+    setMyComponentKey(myComponentKey + 1);
+  };
 
   const categoryNames = products?.map((product) => product.category);
   const categoryCount = categoryNames?.map((category) => category.name);
@@ -28,9 +52,32 @@ export default function Dashboard() {
     ],
   };
 
+  const handleDelete = (id) => {
+    deleteProduct(id)
+      .then(() => {
+        refreshProducts();
+        setAlert({
+          active: true,
+          message: 'Delete product SuccessFully',
+          type: 'error',
+          autoClose: true,
+        });
+        handleRefreshClick();
+      })
+      .catch((error) => {
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: false,
+        });
+      });
+  };
+
   return (
     <>
       <Chart chartData={data} />
+      <Alert alert={alert} handleClose={toggleAlert} />
       <div className="mt-4 flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -84,9 +131,7 @@ export default function Dashboard() {
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
+                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-indigo-600 cursor-ponter hover:text-indigo-900" aria-hidden="true" onClick={() => handleDelete(product.id)} />
                       </td>
                     </tr>
                   ))}
@@ -95,7 +140,8 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <Pagination setOffset={setOffset} productNumberLimit={PRODUCT_LIMIT} totalItems={totalItems} />
+        <Alert alert={alert} handleClose={toggleAlert} />
+        <Pagination setOffset={setOffset} productNumberLimit={PRODUCT_LIMIT} totalItems={totalItems} key={myComponentKey} />
       </div>
     </>
   );
