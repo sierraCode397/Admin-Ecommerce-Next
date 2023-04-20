@@ -162,11 +162,11 @@ export default function FormProduct({ setOpen, setAlert, product }) {
                         htmlFor="images"
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
-                        <span>Upload a file</span>
+                        <span>Upload a URL</span>
                       </label>
                       <input id="images" name="images" type="text" placeholder="Direccion URL de tu imagen" className="ml-4 block w-full h-full p-0 m-0 border-0 outline-none" />
                     </div>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    <p className="text-xs text-gray-500">URL up to 10MB</p>
                   </div>
                 </div>
               </div>
