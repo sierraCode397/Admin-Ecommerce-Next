@@ -4,8 +4,6 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 
 const navigation = [
-  { name: 'Product', href: '/dashboard/products' },
-  { name: 'Features', href: '/dashboard' },
   { name: 'Marketplace', href: 'https://e-commerce-next-six.vercel.app/' },
   { name: 'Company', href: 'https://sierracode397.github.io/' },
 ];
