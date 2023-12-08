@@ -97,7 +97,7 @@ export default function Home() {
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                 Para tener acceso a la Administración de la tienda E-commerce deberas iniciar sesión con el perfil correspondiente, de otra manera serás redireccionad@. <br /> <br />
-                Puedes ver que usuarios usar :
+                Puedes ver que perfiles usar :
                 <Link href="https://api.escuelajs.co/api/v1/users" className="text-indigo-600  hover:text-indigo-400">
                   Aqui
                 </Link>
