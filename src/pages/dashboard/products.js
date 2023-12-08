@@ -2,7 +2,7 @@ import endPoints from '@services/api';
 import FormProduct from '@components/FormProduct';
 import Modal from '@common/Modal';
 import { Fragment, useState, useEffect } from 'react';
-import { BriefcaseIcon, CalendarIcon, PlusIcon, ChevronDownIcon, CurrencyDollarIcon, LinkIcon, PencilIcon, XCircleIcon } from '@heroicons/react/solid';
+import { BriefcaseIcon, CalendarIcon, PlusIcon, ChevronDownIcon, CurrencyDollarIcon, LinkIcon, XCircleIcon } from '@heroicons/react/solid';
 import { Menu, Transition } from '@headlessui/react';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
@@ -78,7 +78,6 @@ export default function Product() {
           </div>
         </div>
         <div className="mt-5 flex lg:ml-4 lg:mt-0">
-
           <span className="ml-3 hidden sm:block">
             <Link href="https://e-commerce-next-six.vercel.app/">
               <button type="button" className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Pagination from '@common/Pagination';
 import { Chart } from '@common/Chart';
 import endPoints from '@services/api';

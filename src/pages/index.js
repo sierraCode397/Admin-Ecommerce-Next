@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const navigation = [
   { name: 'Marketplace', href: 'https://e-commerce-next-six.vercel.app/' },
-  { name: 'Company', href: 'https://sierracode397.github.io/' },
+  { name: 'Company', href: 'https://isaac-luisjuan.vercel.app/' },
 ];
 
 export default function Home() {
@@ -96,7 +96,12 @@ export default function Home() {
                 <span className="block xl:inline">Data to enrich your</span> <span className="block text-indigo-600 xl:inline">online business</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Para tener acceso a la Administración de la tienda E-commerce deberas iniciar sesión con el perfil correspondiente, de otra manera serás redireccionad@. <br/>  <br/>  ¡Disfruta la APP!
+                Para tener acceso a la Administración de la tienda E-commerce deberas iniciar sesión con el perfil correspondiente, de otra manera serás redireccionad@. <br /> <br />
+                Puedes ver que usuarios usar :
+                <Link href="https://api.escuelajs.co/api/v1/users" className="text-indigo-600  hover:text-indigo-400">
+                  Aqui
+                </Link>
+                <br /> <br /> ¡Disfruta la APP!
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
