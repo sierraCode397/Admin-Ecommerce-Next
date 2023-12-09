@@ -70,7 +70,9 @@ La aplicación estará disponible en el puerto 3000 por defecto, pero puede ser 
 Crea un archivo **.ENV** en la raíz del proyecto y proporciona las siguientes variables de entorno para la conexion a la API que contempla este proyecto o alguna otra de tu preferencia (ya sea local o en la nube):
 
 > TAILWIND_MODE = watch
-> NEXT_PUBLIC_API_URL = https://api.escuelajs.co 
+
+> NEXT_PUBLIC_API_URL = https://api.escuelajs.co
+ 
 > NEXT_PUBLIC_API_VERSION = v1
 
 Este proyecto esta configurado para tratar una variedad de EndPoints ubicados en la direccion de la API Recomendada, de una forma mas dinamica segun se requiera. Desde peticiones para obtener los productos del E-Commerce hasta los de autenticacion para acceder al resto de la APP
