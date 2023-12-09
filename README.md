@@ -1,38 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Admin-Ecommerce-Next
 
-## Getting Started
+## Descripción
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Rutas
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Este proyecto cuenta con dos rutas destacables: 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- "/" la ruta por defecto 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- "/dashboard" la ruta secundaria del resto de la app
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+La ruta por defecto **"/"** cuenta con la sub ruta **/login** para obtener el inicio de sesion y acceder al resto de la APP.
 
-## Learn More
+La ruta secundaria **"/dashboard"** cuenta con la sub ruta **"/dashboard/products"** que es el listado de productos para editarlos, eliminarlos o crear nuevos.
 
-To learn more about Next.js, take a look at the following resources:
+## Requisitos Previos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Antes de comenzar, asegúrate de tener instalado Next.js y npm en tu sistema. Puedes descargar ver la documentacion de instalacion de Next.js en [nextjs.org](https://nextjs.org/).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Instalación desde Terminal
 
-## Deploy on Vercel
+##### 1. Clona este repositorio desde GitHub:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  -  git clone https://github.com/sierraCode397/Admin-Ecommerce-Next.git
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+##### 2. Navega al directorio de tu aplicación:
+
+-   cd Admin-Ecommerce-Next
+
+##### 3. Instala las dependencias del proyecto:
+
+-  npm install
+
+## Uso
+
+##### Para ejecutar la aplicación en un entorno local, utiliza el siguiente comando:
+
+ - npm run dev
+
+##### Para ejecutar la aplicación en producción, utiliza:
+
+- npm run start
+
+##### Para ejecutar la busqueda de errores en el codigo fuente:
+
+-  npm run lint
+
+##### Para ejecutar la solucion automatica de los errores encontrados:
+
+-  npm run lint:fix
+
+La aplicación estará disponible en el puerto 3000 por defecto, pero puede ser configurado.
+
+## Configuración
+Crea un archivo **.ENV** en la raíz del proyecto y proporciona las siguientes variables de entorno para la conexion a la API que contempla este proyecto o alguna otra de tu preferencia (ya sea local o en la nube):
+
+> TAILWIND_MODE = watch
+> NEXT_PUBLIC_API_URL = https://api.escuelajs.co 
+> NEXT_PUBLIC_API_VERSION = v1
+
+Este proyecto esta configurado para tratar una variedad de EndPoints ubicados en la direccion de la API Recomendada, de una forma mas dinamica segun se requiera. Desde peticiones para obtener los productos del E-Commerce hasta los de autenticacion para acceder al resto de la APP
+
+## Estructura del Proyecto
+
+La aplicación sigue la arquitectura estandar de **NEXT.js** y se organiza en capas de: "common", "components", "hooks", "pages", "services", "styles" y "layout". Puedes expandir el proyecto agregando más componetes, servicios y demas capas según tus necesidades.
+
+## Licencia
+Este proyecto está bajo la licencia ISC.
+
+## Contacto
+**Isaac Luisjuan**
+
+Correo Electrónico: izaack107@gmail.com
+
+Sitio Web: [SierraCode397](https://isaac-luisjuan.vercel.app/)
+##### Enlace al Repositorio:
+Puedes encontrar el código fuente de este proyecto en [GitHub](https://github.com/sierraCode397/Admin-Ecommerce-Next.git).
+
+## Agradecimientos
+Este proyecto fue creado en la escuela de Platzi como parte del curso **"Curso Profecional de Next.js"**.
+
+Asegúrate de tener las dependecias instaladas en tu sistema antes de ejecutar estos scripts.
+
+¡Gracias por tu interés en este proyecto! Espero que sea una experiencia interesante y satisfactoria.
