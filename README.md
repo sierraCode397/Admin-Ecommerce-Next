@@ -2,7 +2,19 @@
 
 ## Descripción
 
+**Admin-Ecommerce-Next** es un servicio de frontend encargado de administrar la tienda E-Commerce mostrada en proyectos anteriores, a la que puedes acceder [aqui](https://e-commerce-next-six.vercel.app/). Esta creado utilizando Next.js y algunas librerias complementarias. Su funcion es poder editar, eliminar o crear nuevos productos con sus respectivas propiedades y que se vean reflejadas en la API que se consume en el E-Commerce.
 
+La APP cuenta con un sistema de inicio de sesion para que solo los que cuenten con un perfil valido puedan acceder y manipular la API. Por motivos de seguridad la sesion es temporal, eh impide el acceso a la ruta secundaria **"/dashboard"**. Se usan los siguinetes EndPoints: 
+
+- products
+
+- users
+
+- auth
+
+- categories
+
+Todos con sus Metodos CRUD
 
 ## Rutas
 
